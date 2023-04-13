@@ -23,7 +23,11 @@ interface IRedirectMessagesWorkFlowArgs {
   clients: Socket<ClientToServerEvents, ServerToClientEvents>[];
 }
 
-export const conversations: IConversation[] = [];
+export let conversations: IConversation[] = [];
+
+export function setConversations(newData: IConversation[]) {
+  conversations = newData;
+}
 
 export async function redirectMessagesWorkFlow({
   body,
@@ -77,6 +81,10 @@ export async function redirectMessagesWorkFlow({
     conversations[conversationIndex].clientsResponse = clientsThatCanResponse;
 
     if (clientsThatCanResponse.length === 0) {
+      conversations = conversations.filter(
+        (conversation) => conversation.number !== number
+      );
+
       return await sendTextMessage(number, cantRequestMessage);
     }
 

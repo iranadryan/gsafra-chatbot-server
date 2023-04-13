@@ -13,4 +13,5 @@ export interface ClientToServerEvents {
     number: string;
     clientName: string;
   }) => void;
+  removeUser: (number: string) => void;
 }

@@ -2,7 +2,7 @@ import express from 'express';
 import http from 'node:http';
 import { Server, Socket } from 'socket.io';
 import { ClientToServerEvents, ServerToClientEvents } from './types/SocketTypes';
-import { conversations, redirectMessagesWorkFlow } from './redirectMessagesWorkflow';
+import { conversations, redirectMessagesWorkFlow, setConversations } from './redirectMessagesWorkflow';
 
 const PORT = process.env.PORT || 3000;
 
@@ -27,6 +27,12 @@ io.on('connection', (socket) => {
       clientName: body.clientName,
       client: socket,
     });
+  });
+
+  socket.on('removeUser', (number) => {
+    setConversations(conversations.filter(
+      (conversation) => conversation.number !== number
+    ));
   });
 
   socket.on('disconnect', () => {

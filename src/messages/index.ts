@@ -59,5 +59,6 @@ Você poder iniciar uma nova conversar com um desses *termos*:
 _- Oi_
 _- Olá_
 _- Inciar_
+_- Início_
 _- GSafra_
 `.trim();
