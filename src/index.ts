@@ -17,6 +17,10 @@ io.on('connection', (socket) => {
   console.log(`A new client connected: ${socket.id}`);
   clients.push(socket);
 
+  socket.on('testCommunication', (message) => {
+    console.log(`The client send this: ${message}`);
+  });
+
   socket.on('newUserResponse', (body) => {
     const conversationIndex = conversations.findIndex(
       (conversation) => conversation.number === body.number

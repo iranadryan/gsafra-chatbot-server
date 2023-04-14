@@ -8,6 +8,7 @@ export interface ServerToClientEvents {
 }
 
 export interface ClientToServerEvents {
+  testCommunication: (message: string) => void;
   newUserResponse: (body: {
     canResponse: boolean;
     number: string;
