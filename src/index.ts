@@ -14,7 +14,7 @@ export type socketServerType = typeof io;
 let clients: Socket<ClientToServerEvents, ServerToClientEvents>[] = [];
 
 io.on('connection', (socket) => {
-  console.log(`A new client connected: ${socket.id}`);
+  console.log(`A new client connected: ${socket.id} (${clients.length} client(s) connected)`);
   clients.push(socket);
 
   socket.on('testCommunication', (message) => {
@@ -40,7 +40,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-    console.log(`Client disconnected: ${socket.id}`);
+    console.log(`Client disconnected: ${socket.id} (${clients.length} client(s) connected)`);
     clients = clients.filter((client) => client !== socket);
   });
 });
